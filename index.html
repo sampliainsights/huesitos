@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huesitos Combix — Resultados de encuesta — Samplia</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --surface: #f8f9ff;
+      --surface-lowest: #f2f6ff;
+      --surface-low: #eef4ff;
+      --surface-mid: #e6eefc;
+      --surface-high: #dce8ff;
+      --surface-highest: #d0e4ff;
+      --primary: #b31a38;
+      --primary-container: #d6374f;
+      --primary-dim: #8c1229;
+      --on-primary: #ffffff;
+      --on-surface: #001d34;
+      --on-surface-variant: #3d5166;
+      --on-surface-muted: #6b8094;
+      --outline-ghost: rgba(226, 190, 190, .15);
+      --tertiary-container: #ffd8e4;
+      --on-tertiary: #3a0519;
+      --success: #1a7a47;
+      --warning: #b45309;
+      --error: #c62828;
+      --radius-xl: 3rem;
+      --radius-lg: 2rem;
+      --radius-md: 1.5rem;
+      --radius-sm: 0.75rem;
+      --radius-full: 9999px;
+      --shadow-a: 0 8px 40px rgba(0, 29, 52, .05), 0 2px 12px rgba(0, 29, 52, .04);
+      --shadow-f: 0 16px 60px rgba(0, 29, 52, .07), 0 4px 20px rgba(0, 29, 52, .04);
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--surface);
+      color: var(--on-surface);
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--surface-lowest);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 20px rgba(0, 29, 52, .04);
+    }
+
+    .samplia-logo {
+      width: 109px;
+      height: auto;
+      display: block;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .live-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(179, 26, 56, .10);
+      color: var(--primary);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: blink 1.4s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    .last-update {
+      font-size: 11px;
+      color: var(--on-surface-muted);
+    }
+
+    /* TITLE BAR */
+    .title-bar {
+      background: linear-gradient(135deg, var(--primary-dim) 0%, var(--primary) 50%, var(--primary-container) 100%);
+      background-size: 200% 200%;
+      animation: gradientMove 8s ease-in-out infinite alternate;
+      padding: 2rem 2rem 2.5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .title-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 75% -10%, rgba(255, 255, 255, .14) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .title-left {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .brand-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--on-primary);
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -.5px;
+      line-height: 1.1;
+    }
+
+    .title-sub {
+      font-family: 'Manrope', sans-serif;
+      color: rgba(255, 255, 255, .82);
+      font-size: clamp(.8rem, 1.8vw, .95rem);
+      font-weight: 500;
+      margin-top: .4rem;
+    }
+
+    .location-box {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      background: rgba(255, 255, 255, .10);
+      backdrop-filter: blur(24px);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, .18);
+    }
+
+    .location-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: clamp(10px, 1.4vw, 12px);
+      color: rgba(255, 255, 255, .92);
+      line-height: 1.4;
+    }
+
+    /* CONTENT */
+    .content {
+      padding: 2rem;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* CAMPAIGN STATS */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--on-surface) 0%, #003a5c 100%);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem 1.4rem;
+      color: var(--on-primary);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-f);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .stat-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      opacity: .7;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.4px;
+    }
+
+    .stat-sub {
+      font-size: 9.5px;
+      opacity: .6;
+      margin-top: 5px;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      background: var(--surface-lowest);
+      border-radius: var(--radius-full);
+      padding: .6rem .6rem .6rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 72px;
+      z-index: 40;
+      box-shadow: 0 4px 20px rgba(0, 29, 52, .06), 0 1px 6px rgba(0, 29, 52, .04);
+      transition: box-shadow .3s ease, background .3s ease, backdrop-filter .3s ease;
+      border: 1px solid rgba(179, 26, 56, .08);
+      margin-bottom: 2rem;
+    }
+
+    .filter-bar.is-sticky {
+      background: rgba(248, 249, 255, .94);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 8px 32px rgba(0, 29, 52, .12), 0 2px 12px rgba(0, 29, 52, .08);
+    }
+
+    .filter-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--on-surface-muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+
+    .filter-select {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface);
+      background: var(--surface-high);
+      border: none;
+      outline: none;
+      border-radius: var(--radius-full);
+      padding: 8px 32px 8px 14px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233d5166' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 11px center;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .filter-select:focus {
+      background-color: var(--surface-highest);
+    }
+
+    .filter-sep {
+      width: 1px;
+      height: 20px;
+      background: rgba(0, 29, 52, .08);
+    }
+
+    /* KPI ROW */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .kpi {
+      background: var(--surface-low);
+      border-radius: calc(var(--radius-xl) + 1px);
+      padding: 1.5rem 1.4rem;
+      box-shadow: var(--shadow-a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-accent {
+      position: absolute;
+      top: 1.5rem;
+      bottom: 1.5rem;
+      left: 0;
+      width: 3px;
+      border-radius: 0 3px 3px 0;
+      background: linear-gradient(180deg, var(--primary), var(--primary-container));
+    }
+
+    .kpi-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--on-surface-muted);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.5rem, 3.2vw, 2rem);
+      font-weight: 900;
+      color: var(--on-surface);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .kpi-sub {
+      font-size: 9.5px;
+      color: var(--on-surface-variant);
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    .bench-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface-highest);
+      border-radius: var(--radius-full);
+      padding: 3px 10px;
+      margin-top: 6px;
+    }
+
+    .bench-label {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--on-surface-muted);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .bench-val {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .68rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin: 2.5rem 0 1.1rem;
+    }
+
+    /* GRIDS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--surface-low);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 1.6rem;
+      box-shadow: var(--shadow-a);
+    }
+
+    .card-title {
+      font-size: .68rem;
+      font-weight: 700;
+      color: var(--on-surface-muted);
+      text-transform: uppercase;
+      letter-spacing: .55px;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 14px;
+      background: linear-gradient(180deg, var(--primary), var(--primary-container));
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* CHARTS */
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .chart-note {
+      margin-top: .7rem;
+      font-size: .66rem;
+      color: var(--on-surface-muted);
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .h110 {
+      height: clamp(90px, 16vw, 112px);
+    }
+
+    .h130 {
+      height: clamp(100px, 18vw, 132px);
+    }
+
+    .h150 {
+      height: clamp(110px, 20vw, 152px);
+    }
+
+    .h180 {
+      height: clamp(130px, 22vw, 182px);
+    }
+
+    .h200 {
+      height: clamp(150px, 25vw, 202px);
+    }
+
+    .h230 {
+      height: clamp(165px, 28vw, 232px);
+    }
+
+    .h255 {
+      height: clamp(180px, 32vw, 258px);
+    }
+
+    .h300 {
+      height: clamp(200px, 36vw, 302px);
+    }
+
+    .h350 {
+      height: clamp(220px, 40vw, 352px);
+    }
+
+    .h400 {
+      height: clamp(250px, 45vw, 402px);
+    }
+
+    /* MINI STATS */
+    .mini-stat {
+      background: var(--surface-mid);
+      border-radius: calc(var(--radius-lg) + 1px);
+      padding: .85rem;
+      text-align: center;
+    }
+
+    .mini-stat-label {
+      font-size: .59rem;
+      font-weight: 700;
+      color: var(--on-surface-muted);
+      text-transform: uppercase;
+      letter-spacing: .45px;
+      margin-bottom: 4px;
+    }
+
+    .mini-stat-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(.9rem, 2.2vw, 1.15rem);
+      font-weight: 800;
+      color: var(--on-surface);
+      line-height: 1;
+    }
+
+    .mini-stat-value.red {
+      color: var(--error);
+    }
+
+    .mini-stat-value.green {
+      color: var(--success);
+    }
+
+    .mini-stat-value.orange {
+      color: var(--warning);
+    }
+
+    .mini-stat-value.green-gradient {
+      background: linear-gradient(145deg, #9CCC65 0%, #1a7a47 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .mini-stat-value.blue {
+      color: #0077a8;
+    }
+
+    /* WAFFLE */
+    .waffle-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: clamp(120px, 22vw, 155px);
+      gap: 10px;
+    }
+
+    .waffle-grid {
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 2px;
+      width: 100%;
+      height: clamp(75px, 15vw, 95px);
+    }
+
+    .waffle-item {
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      background: var(--surface-high);
+      transition: transform .2s;
+    }
+
+    .waffle-item:hover {
+      transform: scale(1.2);
+      z-index: 2;
+    }
+
+    .waffle-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .66rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* NPS */
+    .nps-bar {
+      display: flex;
+      height: 8px;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: 12px 0 4px;
+      width: 100%;
+    }
+
+    .nps-det {
+      background: var(--error);
+    }
+
+    .nps-pas {
+      background: #9CCC65;
+    }
+
+    .nps-pro {
+      background: var(--success);
+    }
+
+    /* INSIGHTS */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 2rem;
+    }
+
+    .insight-card {
+      position: relative;
+      z-index: 0;
+      background: var(--tertiary-container);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-a);
+      overflow: hidden;
+    }
+
+    .insight-icon {
+      margin-bottom: 8px;
+    }
+
+    .insight-title {
+      font-size: .62rem;
+      font-weight: 800;
+      color: var(--on-tertiary);
+      text-transform: uppercase;
+      letter-spacing: .55px;
+      margin-bottom: 6px;
+      opacity: .65;
+    }
+
+    .insight-body {
+      position: relative;
+      z-index: 1;
+      font-size: .76rem;
+      font-weight: 500;
+      color: var(--on-tertiary);
+      line-height: 1.55;
+    }
+
+    .insight-body strong {
+      font-weight: 800;
+    }
+
+    /* ATTR */
+    .attr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .attr-card {
+      background: var(--surface-mid);
+      border-radius: var(--radius-lg);
+      padding: .9rem;
+      text-align: center;
+    }
+
+    .attr-name {
+      font-size: .6rem;
+      font-weight: 700;
+      color: var(--on-surface-muted);
+      text-transform: uppercase;
+      letter-spacing: .45px;
+      margin-bottom: 4px;
+    }
+
+    .attr-score {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .attr-bar-wrap {
+      height: 4px;
+      background: var(--surface-high);
+      border-radius: var(--radius-full);
+      margin-top: 5px;
+      overflow: hidden;
+    }
+
+    .attr-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      background: linear-gradient(90deg, var(--primary), var(--primary-container));
+      transition: width .7s ease;
+    }
+
+    /* FOOTER */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      background: var(--surface-low);
+      border-radius: var(--radius-xl);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-a);
+    }
+
+    .footer-info {
+      font-size: .7rem;
+      color: var(--on-surface-muted);
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 42px;
+      min-width: 140px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: var(--on-primary);
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 0 1.5rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: .73rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(179, 26, 56, .3);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(179, 26, 56, .42);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 42px;
+      min-width: 170px;
+      background: var(--surface-highest);
+      color: var(--primary);
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 0 1.5rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: .73rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform .2s, background .2s, color .2s;
+    }
+
+    .btn-secondary:hover {
+      transform: scale(1.02);
+      background: var(--primary-container);
+      color: var(--on-primary);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1024px) {
+
+      .kpi-row,
+      .stats-row,
+      .insights-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .title-bar {
+        flex-direction: column;
+      }
+    }
+
+    @media(max-width:768px) {
+      html {
+        font-size: 14px;
+      }
+
+      .header {
+        padding: 0 1rem;
+        height: 56px;
+      }
+
+      .samplia-logo {
+        width: 76px;
+      }
+
+      .title-bar {
+        padding: 1.25rem 1rem 1.5rem;
+      }
+
+      .content {
+        padding: 1rem;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        border-radius: var(--radius-lg);
+      }
+
+      .filter-sep {
+        display: none;
+      }
+
+      .filter-select {
+        width: 100%;
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .last-update {
+        display: none;
+      }
+
+      .attr-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:480px) {
+
+      .kpi-row,
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .attr-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .footer-right {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .chart-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .chart-scroll .chart-wrap {
+      min-width: 300px;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* PHOTO GALLERY */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 2rem;
+    }
+
+    .photo-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      box-shadow: var(--shadow-a);
+      transition: transform .3s ease, box-shadow .3s ease;
+      background: var(--surface-mid);
+    }
+
+    .photo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-f);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .zoom-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 24, 43, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .photo-card:hover .zoom-overlay {
+      background: rgba(0, 24, 43, 0.4);
+    }
+
+    .zoom-btn {
+      width: 44px;
+      height: 44px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: var(--primary);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .photo-card:hover .zoom-btn {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* LIGHTBOX MODAL */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 18, 32, 0.92);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-content {
+      max-width: 94%;
+      max-height: 94%;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .lightbox.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 88vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <img class="samplia-logo" src="https://samplia.com/assets/img/Samplia.svg" alt="Samplia" />
+    <div class="header-right">
+      <div class="live-pill">
+        <div class="live-dot"></div>En vivo
+      </div>
+      <span class="last-update" id="lastUpdate">Cargando…</span>
+    </div>
+  </header>
+
+  <div class="title-bar">
+    <div class="title-left">
+      <div class="brand-title">Huesitos Combix</div>
+      <div class="title-sub">Resultados de encuesta a consumidores</div>
+    </div>
+    <div class="location-box">
+      <div class="location-line">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+          style="flex-shrink:0;margin-top:2px;opacity:.8">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+        <span><strong>Samplia X Shop Experience</strong> · CC Carrefour Alcobendas, Madrid</span>
+      </div>
+      <div class="location-line">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+          style="flex-shrink:0;margin-top:2px;opacity:.8">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        <span>Del <strong>13/03/2026</strong> al <strong>10/04/2026</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="stats-row" style="margin-top:2rem;">
+      <div class="stat-card">
+        <div class="stat-label">Samplings entregados</div>
+        <div class="stat-value">16.251</div>
+        <div class="stat-sub">Total distribución</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Ventas realizadas</div>
+        <div class="stat-value">861</div>
+        <div class="stat-sub">Durante la campaña</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Facturación</div>
+        <div class="stat-value">2.662,98 €</div>
+        <div class="stat-sub">Ingresos generados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tasa de conversión</div>
+        <div class="stat-value">5,3%</div>
+        <div class="stat-sub">Ventas / Samplings</div>
+      </div>
+    </div>
+
+    <div class="kpi-row" style="margin-top:1.5rem;">
+      <div class="kpi">
+        <div class="kpi-accent"></div>
+        <div class="kpi-label">Encuestados</div>
+        <div class="kpi-value" id="kpiTotal">—</div>
+        <div class="kpi-sub" id="kpiTotalSub">— % de samplings</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent"></div>
+        <div class="kpi-label">Conocimiento previo</div>
+        <div class="kpi-value" id="kpiKnew">—</div>
+        <div class="kpi-sub">Conocían Huesitos Combix</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent"></div>
+        <div class="kpi-label">Valoración media</div>
+        <div class="kpi-value" id="kpiScore">—</div>
+        <div class="kpi-sub">Escala 1–10</div>
+        <div id="kpiBenchScore"></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-accent"></div>
+        <div class="kpi-label">Intención de compra</div>
+        <div class="kpi-value" id="kpiCompraIntencion">—</div>
+        <div class="kpi-sub">Compradores Potenciales</div>
+        <div id="kpiBenchCompraIntencion"></div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:2.5rem;">Demográficos</div>
+
+    <div class="filter-bar">
+      <span class="filter-label">Filtrar por</span>
+      <div class="filter-sep"></div>
+      <span class="filter-label" style="font-size:9.5px;">Género</span>
+      <select class="filter-select" id="fGender">
+        <option value="">Todos</option>
+        <option value="F">Femenino</option>
+        <option value="M">Masculino</option>
+      </select>
+      <div class="filter-sep"></div>
+      <span class="filter-label" style="font-size:9.5px;">Edad</span>
+      <select class="filter-select" id="fAge">
+        <option value="">Todos</option>
+        <option value="18-24">18–24</option>
+        <option value="25-34">25–34</option>
+        <option value="35-44">35–44</option>
+        <option value="45-54">45–54</option>
+        <option value="55-64">55–64</option>
+        <option value="65+">65+</option>
+      </select>
+    </div>
+
+    <div class="grid-2" style="margin-top:2.5rem; align-items: flex-start;">
+      <div class="card">
+        <div class="card-title">Distribución por rango de edad</div>
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="display:flex; flex-direction:column; gap:12px; min-width:95px; flex-shrink:0;">
+            <div class="mini-stat">
+              <div class="mini-stat-label">Edad media</div>
+              <div class="mini-stat-value" id="edadMediaValue">—</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Edad moda</div>
+              <div class="mini-stat-value" id="edadModaValue">—</div>
+            </div>
+          </div>
+          <div class="chart-wrap h200" style="flex:1; min-width:0;"><canvas id="chartEdad"></canvas></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Distribución por género</div>
+        <div class="chart-wrap h200"><canvas id="chartGenero"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-label">Conocimiento de Huesitos Combix</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Conocimiento previo antes del sampling</div>
+        <div class="waffle-wrap">
+          <div id="cConocia" class="waffle-grid"></div>
+          <div class="waffle-legend" id="conociaLegend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Productos de la gama Huesitos probados anteriormente</div>
+        <div class="chart-wrap h200"><canvas id="cProductosGama"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Frecuencia de consumo de barritas / snacks de galleta</div>
+        <div class="chart-wrap h255"><canvas id="cFrecuencia"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tipo de chocolate que consume en snacks</div>
+        <div class="chart-wrap h255"><canvas id="cTipoChocolate"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Marcas de barritas / snacks de galleta conocidas</div>
+        <div class="chart-wrap h300"><canvas id="cMarcasConocidas"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 Otras marcas mencionadas espontáneamente</div>
+        <div class="chart-wrap h300"><canvas id="cOtrasMarcas"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-label">Preferencias de marca</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Marca favorita de barritas / snacks de galleta</div>
+        <div class="chart-wrap h350"><canvas id="cMarcaFavorita"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 Otras marcas favoritas mencionadas espontáneamente</div>
+        <div class="chart-wrap h350"><canvas id="cOtraMarcaFav"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-label">Experiencia y valoración del producto</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Opinión sobre Huesitos Combix probado con Samplia</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+          <div class="chart-wrap h230" style="flex:1;min-width:170px;"><canvas id="cOpinion"></canvas></div>
+          <div class="mini-stat" style="min-width:72px;margin-top:18px;">
+            <div class="mini-stat-label">Top 2 Box</div>
+            <div class="mini-stat-value green" id="mOpinionTop2">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Comparación con el snack habitual</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+          <div class="chart-wrap h230" style="flex:1;min-width:170px;"><canvas id="cComparacion"></canvas></div>
+          <div class="mini-stat" style="min-width:72px;margin-top:18px;">
+            <div class="mini-stat-label">Top 2 Box</div>
+            <div class="mini-stat-value green" id="mTop2">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-title">Valoración general de Huesitos Combix (escala 1–10)</div>
+      <div class="grid-4">
+        <div class="mini-stat">
+          <div class="mini-stat-label">Insatisfechos (1–4)</div>
+          <div class="mini-stat-value red" id="mScoreInsat">—</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-label">Neutrales (5–6)</div>
+          <div class="mini-stat-value orange" id="mScoreNeu">—</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-label">Satisfechos (7–10)</div>
+          <div class="mini-stat-value green-gradient" id="mScoreSat">—</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-label">Muy satisfechos (9–10)</div>
+          <div class="mini-stat-value green" id="mScoreMuySat">—</div>
+        </div>
+      </div>
+      <div class="chart-wrap h150" style="margin-top:.75rem;"><canvas id="cScore"></canvas></div>
+      <div class="chart-note">Insatisfechos 1–4 · Neutrales 5–6 · Satisfechos 7–10 · Muy satisfechos 9–10</div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-title">Valoración de atributos del producto</div>
+      <div class="chart-wrap h350" id="attrChartWrap"><canvas id="cAtributos"></canvas></div>
+    </div>
+
+    <div class="section-label">Intención de compra y frenos</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Probabilidad de compra en la próxima visita</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+          <div class="chart-wrap h350" style="flex:1;min-width:170px;"><canvas id="cCompra"></canvas></div>
+          <div class="mini-stat" style="min-width:95px;margin-top:18px;">
+            <div class="mini-stat-label">Compradores Potenciales</div>
+            <div class="mini-stat-value blue" id="mCompraPotencial">—</div>
+            <div id="mCompraBench"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Frenos de compra</div>
+        <div class="chart-wrap h350"><canvas id="cNoGusta"></canvas></div>
+      </div>
+    </div>
+
+
+    <div class="section-label">Intención de recomendación</div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-title">¿Recomendarías Huesitos Combix a un amigo o familiar?</div>
+      <div style="display:flex;justify-content:center;margin-bottom:1.5rem;margin-top:.75rem;">
+        <div class="mini-stat" style="min-width:220px;max-width:320px;width:100%;">
+          <div class="mini-stat-label" id="npsLabel">Recomendarían el producto</div>
+          <div id="npsValue"
+            style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;color:var(--on-surface);line-height:1;margin-bottom:2px;">
+            —</div>
+          <div class="nps-bar">
+            <div class="nps-det" id="npsBarDet" style="width:0%"></div>
+            <div class="nps-pas" id="npsBarPas" style="width:0%"></div>
+            <div class="nps-pro" id="npsBarPro" style="width:0%"></div>
+          </div>
+          <div
+            style="display:flex;justify-content:space-between;margin-top:8px;font-size:.66rem;font-weight:700;gap:4px;flex-wrap:wrap;">
+            <span id="npsLegDet" style="color:var(--error);">—</span>
+            <span id="npsLegPas" style="color:#9CCC65;">—</span>
+            <span id="npsLegPro" style="color:var(--success);">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrap h200" id="npsScaleWrap" style="max-width:780px;margin:0 auto;"><canvas
+          id="cNpsScale"></canvas></div>
+      <div id="npsLegendBar"
+        style="display:flex;gap:18px;justify-content:center;margin-top:1.25rem;font-size:.7rem;font-weight:700;color:var(--on-surface-variant);flex-wrap:wrap;">
+      </div>
+    </div>
+
+    <div class="section-label">Insights de negocio</div>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="var(--on-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            opacity=".65">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg></div>
+        <div class="insight-title">Intención de compra</div>
+        <div class="insight-body" id="insightCompra">—</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="var(--on-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            opacity=".65">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg></div>
+        <div class="insight-title">Valoración del producto</div>
+        <div class="insight-body" id="insightScore">—</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="var(--on-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            opacity=".65">
+            <path d="m3 11 18-5v12L3 14v-3z" />
+            <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
+          </svg></div>
+        <div class="insight-title">Descubrimiento de marca</div>
+        <div class="insight-body" id="insightBrand">—</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="var(--on-tertiary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            opacity=".65">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg></div>
+        <div class="insight-title">Recomendación y boca-oreja</div>
+        <div class="insight-body" id="insightNps">—</div>
+      </div>
+    </div>
+
+    <div class="section-label">Fotos de la campaña</div>
+    <div class="photo-grid">
+      <div class="photo-card"
+        onclick="openLightbox('https://lh3.googleusercontent.com/d/16llEdOlbcl1M3oEQFHYZ5grlbSQESgMh')">
+        <img src="https://lh3.googleusercontent.com/d/16llEdOlbcl1M3oEQFHYZ5grlbSQESgMh" alt="Campaña Huesitos 1"
+          loading="lazy">
+        <div class="zoom-overlay">
+          <div class="zoom-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="photo-card"
+        onclick="openLightbox('https://lh3.googleusercontent.com/d/1HuzuVRU2ks3IW3dvQ0Xa8hQd9mlQHICB')">
+        <img src="https://lh3.googleusercontent.com/d/1HuzuVRU2ks3IW3dvQ0Xa8hQd9mlQHICB" alt="Campaña Huesitos 2"
+          loading="lazy">
+        <div class="zoom-overlay">
+          <div class="zoom-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="photo-card"
+        onclick="openLightbox('https://lh3.googleusercontent.com/d/1os4hQYcpFFtkwDLuJWLR3xiz10ETCNyP')">
+        <img src="https://lh3.googleusercontent.com/d/1os4hQYcpFFtkwDLuJWLR3xiz10ETCNyP" alt="Campaña Huesitos 3"
+          loading="lazy">
+        <div class="zoom-overlay">
+          <div class="zoom-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="photo-card"
+        onclick="openLightbox('https://lh3.googleusercontent.com/d/1ETbE8jn5f4nDhzq0biamWTot3IdxDCY2')">
+        <img src="https://lh3.googleusercontent.com/d/1ETbE8jn5f4nDhzq0biamWTot3IdxDCY2" alt="Campaña Huesitos 4"
+          loading="lazy">
+        <div class="zoom-overlay">
+          <div class="zoom-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="11" y1="8" x2="11" y2="14"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Vídeo de la campaña</div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-title">Huesitos Combix — Campaña Samplia X Shop Experience</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1.25rem;">
+        <a href="https://youtu.be/DSFXCBv27XY?si=yZBS_9huejB1O787" target="_blank" rel="noopener noreferrer"
+          style="display:block;position:relative;width:100%;max-width:640px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-f);cursor:pointer;text-decoration:none;">
+          <img src="https://img.youtube.com/vi/DSFXCBv27XY/maxresdefault.jpg" alt="Vídeo Huesitos Combix"
+            style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;"
+            onerror="this.src='https://img.youtube.com/vi/DSFXCBv27XY/hqdefault.jpg';" />
+          <div
+            style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,29,52,.28);transition:background .3s;"
+            onmouseover="this.style.background='rgba(0,29,52,.42)'"
+            onmouseout="this.style.background='rgba(0,29,52,.28)'">
+            <div
+              style="width:68px;height:68px;background:linear-gradient(135deg,var(--primary),var(--primary-container));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 30px rgba(179,26,56,.5);transition:transform .2s;"
+              onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"
+                style="margin-left:3px;">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </div>
+          </div>
+          <div
+            style="position:absolute;bottom:12px;right:12px;background:rgba(0,29,52,.80);color:#fff;font-size:.62rem;font-weight:700;padding:4px 10px;border-radius:var(--radius-full);display:flex;align-items:center;gap:5px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#FF0000">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
+            Ver en YouTube
+          </div>
+        </a>
+        <p
+          style="font-size:.73rem;color:var(--on-surface-muted);text-align:center;max-width:480px;line-height:1.6;margin:0;">
+          Haz clic para ver el vídeo completo de la campaña Huesitos Combix en Samplia.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="footer-info" id="footerInfo">Última actualización — · se refresca cada 24 h</span>
+      <div class="footer-right">
+        <button class="btn-primary" id="downloadPdfBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+            style="flex-shrink:0">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Descargar PDF
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+        Cerrar
+      </button>
+      <img id="lightboxImg" src="" alt="Vista ampliada">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    Chart.defaults.font.family = "'Manrope', sans-serif";
+
+    const GSHEET_URL = 'https://docs.google.com/spreadsheets/d/17p2A1teUbtoIj9_XlobCLCbNJ7i8zLU26A7OMvvCKN0/gviz/tq?tqx=out:json&gid=1948070365';
+    const TOTAL_SAMPLINGS = 16251;
+    const BENCH_COMPRA = 42;
+    const BENCH_SCORE = 8.0;
+    let allRows = [], charts = {};
+
+    const MANDY = ['#8c1229', '#b31a38', '#d6374f', '#e06272', '#ec9aaa', '#f5c8d0'];
+    const MIDNIGHT = ['#001d34', '#003a5c', '#005880', '#0077a8', '#4499c4', '#88bbda'];
+    const MIXED = ['#b31a38', '#001d34', '#d6374f', '#003a5c', '#e06272', '#4499c4', '#8c1229', '#0077a8'];
+
+    let CI = {
+      gender: -1, age: -1, frecuencia: -1, tipoChocolate: -1,
+      marcasConocidas: -1, otrasMarcas: -1, marcaFavorita: -1, otraMarcaFav: -1,
+      conocia: -1, productosGama: -1, opinion: -1, comparacion: -1,
+      score: -1, compra: -1, noGusta: -1, nps: -1, atributos: []
+    };
+
+    function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+    function pct(n, t) { return t > 0 ? Math.round(n / t * 100) : 0; }
+    function normalizeText(value) { return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/g, ' ').toLowerCase().replace(/\s+/g, ' ').trim(); }
+    function getCol(rows, idx) { return idx >= 0 ? rows.map(r => normalizeText(r[idx] || '')).filter(v => v !== '') : []; }
+    function countSingle(arr) { const m = {}; arr.forEach(v => { if (v) m[v] = (m[v] || 0) + 1; }); return m; }
+    function countMulti(rows, idx) { const m = {}; if (idx < 0) return m; rows.forEach(r => { (r[idx] || '').toString().split(/[,;]+/).forEach(v => { const k = normalizeText(v); if (k) m[k] = (m[k] || 0) + 1; }); }); return m; }
+    function sortedEntries(map, max = 12) { return Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, max); }
+    function ageGroup(val) {
+      const v = val.toString().trim();
+      const groups = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
+      const direct = groups.find(g => v === g || v.replace(/\s/g, '').startsWith(g.replace(/\s/g, '')));
+      if (direct) return direct;
+      const n = parseInt(v);
+      if (isNaN(n) || n < 18) return null;
+      if (n <= 24) return '18-24'; if (n <= 34) return '25-34'; if (n <= 44) return '35-44';
+      if (n <= 54) return '45-54'; if (n <= 64) return '55-64'; return '65+';
+    }
+    function wrapLabel(label, max = 28) { if (typeof label !== 'string' || label.length <= max) return label; const words = label.split(' '); const lines = []; words.forEach(w => { const last = lines[lines.length - 1]; if (!last) lines.push(w); else if ((last + ' ' + w).length <= max) lines[lines.length - 1] = last + ' ' + w; else lines.push(w); }); return lines; }
+
+    function detectColumns(headers) {
+      headers.forEach((cell, idx) => {
+        const t = (cell || '').toString().toLowerCase();
+        if (CI.gender < 0 && /gender|sexo/.test(t)) CI.gender = idx;
+        else if (CI.age < 0 && /edad/.test(t)) CI.age = idx;
+        else if (CI.conocia < 0 && /(conocías|conocia|conocimiento)/.test(t)) CI.conocia = idx;
+        else if (CI.compra < 0 && /(probable.*compres|compres|comprar|compra)/.test(t)) CI.compra = idx;
+        else if (CI.score < 0 && /(valoración general|valoracion general)/.test(t)) CI.score = idx;
+        else if (CI.nps < 0 && /(recomendarías|recomendar)/.test(t)) CI.nps = idx;
+        else if (CI.frecuencia < 0 && /(frecuencia consumes)/.test(t)) CI.frecuencia = idx;
+        else if (CI.tipoChocolate < 0 && /(tipo de chocolate)/.test(t)) CI.tipoChocolate = idx;
+        else if (CI.marcaFavorita < 0 && /(marca favorita)/.test(t)) CI.marcaFavorita = idx;
+        else if (CI.comparacion < 0 && /(comparada|calificarías)/.test(t)) CI.comparacion = idx;
+        else if (CI.opinion < 0 && /(qué te ha parecido)/.test(t)) CI.opinion = idx;
+        else if (CI.marcasConocidas < 0 && /(marcas.*conoces|marcas.*conocidas)/.test(t)) CI.marcasConocidas = idx;
+        else if (CI.otrasMarcas < 0 && /(otras.*marcas|espontane)/.test(t) && CI.marcasConocidas >= 0) CI.otrasMarcas = idx;
+        else if (CI.otraMarcaFav < 0 && /(otra.*favorita|favorita.*otra)/.test(t)) CI.otraMarcaFav = idx;
+        else if (CI.productosGama < 0 && /(productos.*gama|gama.*productos|huesitos.*probado)/.test(t)) CI.productosGama = idx;
+        else if (CI.noGusta < 0 && /(no.*gusta|gusta.*no|aspectos.*negativos|mejorar)/.test(t)) CI.noGusta = idx;
+
+        // Detect attribute columns (score columns with scale keywords)
+        if (/(sabor|dulzor|tamaño|chocolate|crujiente|oblea|textura|practicidad)/.test(normalizeText(t)) && CI.atributos.length < 10) {
+          if (!CI.atributos.includes(idx)) CI.atributos.push(idx);
+        }
+      });
+    }
+
+    function makeBar(id, labels, data, colors, horiz = false, showDL = true, hideY = false, hideX = false) {
+      destroyChart(id);
+      const canvas = document.getElementById(id); if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const total = data.reduce((a, b) => a + b, 0);
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+
+      let finalColors = colors;
+      if (colors === 'brand-gradient') {
+        const g = ctx.createLinearGradient(0, 0, horiz ? canvas.offsetWidth : 0, horiz ? 0 : canvas.offsetHeight);
+        g.addColorStop(0, '#8c1229');
+        g.addColorStop(0.5, '#b31a38');
+        g.addColorStop(1, '#d6374f');
+        finalColors = g;
+      } else if (Array.isArray(colors)) {
+        finalColors = colors.map(c => {
+          if (c === 'brand-gradient') {
+            const g = ctx.createLinearGradient(0, 0, horiz ? canvas.offsetWidth : 0, horiz ? 0 : canvas.offsetHeight);
+            g.addColorStop(0, '#8c1229');
+            g.addColorStop(0.5, '#b31a38');
+            g.addColorStop(1, '#d6374f');
+            return g;
+          }
+          return c;
+        });
+      }
+      charts[id] = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: labels.map(l => wrapLabel(String(l), horiz ? 22 : 14)), datasets: [{ data, backgroundColor: finalColors, borderRadius: 6, borderSkipped: false }] },
+        options: {
+          responsive: true, maintainAspectRatio: false, indexAxis: horiz ? 'y' : 'x',
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: c => { const s = c.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return s > 0 ? ' ' + Math.round(c.raw / s * 100) + '%' : ' 0%'; } } },
+            datalabels: showDL ? { anchor: horiz ? 'end' : 'end', align: horiz ? 'end' : 'top', formatter: v => total > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: 'Manrope', weight: 700, size: fs }, color: '#001d34', clip: false } : { display: false }
+          },
+          layout: { padding: { top: !horiz ? 14 : 0, right: horiz ? 40 : 0, left: horiz ? 24 : 0 } },
+          scales: {
+            x: { display: (!horiz || !hideY) && !hideX, grid: { display: horiz, color: 'rgba(0,29,52,.04)' }, ticks: { font: { family: 'Manrope', size: fs } }, grace: horiz ? '12%' : 0 },
+            y: { display: !hideY, grid: { color: 'rgba(0,29,52,.04)', display: !horiz }, ticks: { font: { family: 'Manrope', size: fs } }, grace: !horiz ? '12%' : 0 }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    }
+
+    function makeRatingBar(id, dist, max, colorFn, hideY = false) {
+      destroyChart(id);
+      const ctx = document.getElementById(id); if (!ctx) return;
+      const labels = Array.from({ length: max }, (_, i) => String(i + 1));
+      const vals = labels.map(l => dist[l] || 0);
+      const total = vals.reduce((a, b) => a + b, 0);
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+      charts[id] = new Chart(ctx.getContext('2d'), {
+        type: 'bar',
+        data: { labels, datasets: [{ data: vals, backgroundColor: labels.map(l => colorFn(+l)), borderRadius: 6 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: c => total > 0 ? ' ' + Math.round(c.raw / total * 100) + '%' : ' 0%' } },
+            datalabels: { display: true, anchor: 'end', align: 'top', formatter: v => total > 0 && v > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: 'Manrope', weight: 700, size: fs }, color: '#001d34', clip: false }
+          },
+          layout: { padding: { top: 14 } },
+          scales: {
+            x: { grid: { display: false }, ticks: { font: { family: 'Manrope', size: fs } } },
+            y: { display: !hideY, grid: { color: 'rgba(0,29,52,.04)' }, ticks: { font: { family: 'Manrope', size: fs } }, grace: '12%' }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    }
+
+    function makeWaffle(id, labels, data, colors) {
+      const c = document.getElementById(id); if (!c) return; c.innerHTML = '';
+      const total = data.reduce((a, b) => a + b, 0); if (!total) return;
+      const pcts = data.map(v => Math.round(v / total * 100));
+      let s = pcts.reduce((a, b) => a + b, 0); while (s < 100) { pcts[0]++; s++; } while (s > 100) { pcts[0]--; s--; }
+      const flat = []; pcts.forEach((p, i) => { for (let k = 0; k < p; k++) flat.push(colors[i]); });
+      flat.forEach(col => { const d = document.createElement('div'); d.className = 'waffle-item'; d.style.backgroundColor = col; c.appendChild(d); });
+    }
+
+    function makeDoughnut(id, labels, data, colors) {
+      destroyChart(id);
+      const ctx = document.getElementById(id); if (!ctx) return;
+      const total = data.reduce((a, b) => a + b, 0);
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+      charts[id] = new Chart(ctx.getContext('2d'), {
+        type: 'doughnut',
+        data: { labels: labels.map(l => wrapLabel(String(l), 20)), datasets: [{ data, backgroundColor: colors, borderWidth: 2, borderColor: '#f8f9ff' }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: true, position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle' } },
+            tooltip: { callbacks: { label: c => { const s = c.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return s > 0 ? ' ' + Math.round(c.raw / s * 100) + '%' : ' 0%'; } } },
+            datalabels: { display: true, formatter: v => total > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: 'Manrope', weight: 700, size: fs }, color: '#ffffff' }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    }
+
+    function render(rows) {
+      const total = rows.length;
+      document.getElementById('kpiTotal').textContent = total.toLocaleString('es-ES');
+      document.getElementById('kpiTotalSub').textContent = (pct(total, TOTAL_SAMPLINGS)).toFixed(2) + '% de samplings';
+
+      // KPI Conocía
+      // Use column B (index 1) for exact percentage of 'Sí conocía'
+      const conociaArr = rows.map(r => (r[1] || '').toString().trim()).filter(v => v !== '');
+      const conociaTotal = conociaArr.length;
+      const siKnew = conociaArr.filter(v => { const l = v.toLowerCase(); return l.includes('sí') || l === 'si'; }).length;
+      document.getElementById('kpiKnew').textContent = conociaTotal > 0 ? Math.round(siKnew / conociaTotal * 100) + '%' : '—';
+
+      // KPI Score
+      const scoreArr = getCol(rows, CI.score).map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
+      const scoreAvg = scoreArr.length > 0 ? scoreArr.reduce((a, b) => a + b, 0) / scoreArr.length : 0;
+      document.getElementById('kpiScore').textContent = scoreArr.length > 0 ? scoreAvg.toFixed(1) : '—';
+      const diffS = parseFloat((scoreAvg - BENCH_SCORE).toFixed(1));
+      document.getElementById('kpiBenchScore').innerHTML = scoreArr.length > 0 ? `<div class="bench-pill"><span class="bench-label">Bench ${BENCH_SCORE}</span><span class="bench-val" style="color:${diffS >= 0 ? 'var(--success)' : 'var(--error)'}">${diffS >= 0 ? '+' : ''}${diffS}</span></div>` : '';
+
+      // Score distribution
+      const scoreDist = {};
+      scoreArr.forEach(v => { const k = String(Math.round(v)); scoreDist[k] = (scoreDist[k] || 0) + 1; });
+      const sT = scoreArr.length;
+      const sInsat = scoreArr.filter(v => v <= 4).length;
+      const sNeu = scoreArr.filter(v => v >= 5 && v <= 6).length;
+      const sSat = scoreArr.filter(v => v >= 7).length;
+      const sMuySat = scoreArr.filter(v => v >= 9).length;
+      const sMS = sMuySat;
+      document.getElementById('mScoreInsat').textContent = sT > 0 ? pct(sInsat, sT) + '%' : '—';
+      document.getElementById('mScoreNeu').textContent = sT > 0 ? pct(sNeu, sT) + '%' : '—';
+      document.getElementById('mScoreSat').textContent = sT > 0 ? pct(sSat, sT) + '%' : '—';
+      document.getElementById('mScoreMuySat').textContent = sT > 0 ? pct(sMuySat, sT) + '%' : '—';
+      if (sT > 0) makeRatingBar('cScore', scoreDist, 10, n => { if (n <= 4) return '#c62828'; if (n <= 6) return '#d97706'; if (n <= 8) return '#9CCC65'; return '#1a7a47'; }, true);
+
+      // Age
+      const ageGroups = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
+      const ageCounts = {};
+      ageGroups.forEach(g => ageCounts[g] = 0);
+      const ageNums = [];
+      getCol(rows, CI.age).forEach(v => {
+        const g = ageGroup(v);
+        if (g) { ageCounts[g] = (ageCounts[g] || 0) + 1; const n = parseInt(v); if (!isNaN(n) && n >= 18) ageNums.push(n); }
+      });
+      const ageData = ageGroups.map(g => ageCounts[g] || 0);
+      if (ageData.some(v => v > 0)) makeBar('chartEdad', ageGroups, ageData, MANDY.slice(0, 6), false, true, true, false);
+      if (ageNums.length > 0) {
+        const avgAge = (ageNums.reduce((a, b) => a + b, 0) / ageNums.length).toFixed(0);
+        document.getElementById('edadMediaValue').textContent = avgAge + ' años';
+        // Calculate the mode (most repeated age number)
+        const ageFreq = {};
+        ageNums.forEach(n => { ageFreq[n] = (ageFreq[n] || 0) + 1; });
+        let modaAge = ageNums[0], maxCount = 0;
+        Object.entries(ageFreq).forEach(([num, count]) => {
+          if (count > maxCount || (count === maxCount && parseInt(num) < modaAge)) {
+            modaAge = parseInt(num);
+            maxCount = count;
+          }
+        });
+        document.getElementById('edadModaValue').textContent = modaAge + ' años';
+      }
+
+      // Gender
+      const genderArr = CI.gender >= 0 ? rows.map(r => (r[CI.gender] || '').toString().trim().toLowerCase()).filter(v => v) : [];
+      if (genderArr.length > 0) {
+        const fCount = genderArr.filter(v => v.startsWith('f') || v === 'mujer' || v === 'femenino').length;
+        const mCount = genderArr.filter(v => v.startsWith('m') || v === 'hombre' || v === 'masculino').length;
+        const oCount = genderArr.length - fCount - mCount;
+        const gLabels = ['Femenino', 'Masculino'];
+        const gData = [fCount, mCount];
+        const gColors = [MANDY[1], MIDNIGHT[1]];
+        if (oCount > 0) { gLabels.push('Otro/NS'); gData.push(oCount); gColors.push('#9CCC65'); }
+        makeDoughnut('chartGenero', gLabels, gData, gColors);
+      }
+
+      // Conocía waffle
+      // Use responses from column B (index 1) for this chart
+      const conociaRaw = rows.map(r => (r[1] || '').toString().trim()).filter(v => v !== '');
+      const conociaFilteredTotal = conociaRaw.length;
+      const siKnewFiltered = conociaRaw.filter(v => {
+        const l = v.toLowerCase();
+        return l.includes('sí') || l === 'si';
+      }).length;
+      if (conociaFilteredTotal > 0) {
+        const noKnewFiltered = conociaFilteredTotal - siKnewFiltered;
+        makeWaffle('cConocia', ['Sí conocía', 'No conocía'], [siKnewFiltered, noKnewFiltered], [MANDY[1], MIDNIGHT[3]]);
+        const legendEl = document.getElementById('conociaLegend');
+        legendEl.innerHTML = [['Sí conocía', MANDY[1], siKnewFiltered], ['No conocía', MIDNIGHT[3], noKnewFiltered]].map(([l, c, n]) =>
+          `<div class="legend-item"><div class="legend-dot" style="background:${c}"></div>${l} (${pct(n, conociaFilteredTotal)}%)</div>`).join('');
+      }
+
+      // Productos gama
+      // Use responses from column K (index 10) for this chart
+      // "Los he probado, pero no recuerdo cual" contains a comma – protect it before splitting
+      const productosGamaMap = {};
+      rows.forEach(r => {
+        let val = (r[10] || '').toString();
+        // Remove the comma inside this specific multi-word answer so it stays as one entry
+        val = val.replace(/los he probado,\s*pero no recuerdo cu[aá]l/gi, 'Los he probado pero no recuerdo cuál');
+        val.split(/[,;]+/).forEach(v => {
+          const k = normalizeText(v);
+          if (k) productosGamaMap[k] = (productosGamaMap[k] || 0) + 1;
+        });
+      });
+      const productosGamaEntries = sortedEntries(productosGamaMap);
+      if (productosGamaEntries.length > 0) {
+        makeBar('cProductosGama', productosGamaEntries.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), productosGamaEntries.map(e => e[1]), MANDY.slice(0, productosGamaEntries.length), true, true, false, true);
+      }
+
+      // Frecuencia
+      const freqMap = countSingle(getCol(rows, CI.frecuencia));
+      const freqOrder = ['diario', '2 a veces por semana', '2 a 3 veces al mes', '1 vez al mes', '1 vez cada 3 meses', 'no consumo este tipo de productos'];
+      const freqSorted = [...freqOrder.filter(k => freqMap[k]), ...Object.keys(freqMap).filter(k => !freqOrder.includes(k))];
+      const freqReversed = [...freqSorted].reverse();
+      if (freqReversed.length > 0) makeBar('cFrecuencia', freqReversed.map(k => k.charAt(0).toUpperCase() + k.slice(1)), freqReversed.map(k => freqMap[k] || 0), freqReversed.map((_, i, arr) => MANDY[Math.min(arr.length - 1 - i, MANDY.length - 1)]), false, true, true, false);
+
+      // Tipo chocolate
+      const chocE = sortedEntries(countSingle(getCol(rows, CI.tipoChocolate)));
+      if (chocE.length > 0) {
+        let mandyIdx = 0;
+        const chocColors = chocE.map(e => e[0] === 'chocolate blanco' ? '#b0b8c1' : MANDY[mandyIdx++] || MANDY[MANDY.length - 1]);
+        makeDoughnut('cTipoChocolate', chocE.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), chocE.map(e => e[1]), chocColors);
+      }
+
+      // Marcas conocidas
+      const mcE = sortedEntries(countMulti(rows, CI.marcasConocidas));
+      if (mcE.length > 0) makeBar('cMarcasConocidas', mcE.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), mcE.map(e => e[1]), mcE.map(e => e[0] === 'otras' ? '#d1d5db' : '#b31a38'), true, true, false, true);
+
+      // Otras marcas
+      const omE = sortedEntries(countMulti(rows, 8), 10);
+      if (omE.length > 0) makeBar('cOtrasMarcas', omE.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), omE.map(e => e[1]), '#d1d5db', true, true, false, true);
+
+      // Marca favorita
+      const mfE = sortedEntries(countSingle(getCol(rows, CI.marcaFavorita)));
+      if (mfE.length > 0) makeBar('cMarcaFavorita', mfE.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), mfE.map(e => e[1]), mfE.map(e => (e[0] === 'otras' || e[0] === 'otra') ? '#d1d5db' : 'brand-gradient'), true, true, false, true);
+
+      // Otra marca fav
+      const omfE = sortedEntries(countSingle(getCol(rows, 4)), 10);
+      if (omfE.length > 0) makeBar('cOtraMarcaFav', omfE.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), omfE.map(e => e[1]), '#d1d5db', true, true, false, true);
+
+      // Opinión
+      const opMap = countSingle(getCol(rows, CI.opinion));
+      const opOrder = ['mucho mejor de lo que esperaba', 'algo mejor de lo que esperaba', 'como lo esperaba', 'peor de lo que esperaba', 'mucho peor de lo que esperaba'];
+      const opL = [...opOrder.filter(k => opMap[k]), ...Object.keys(opMap).filter(k => !opOrder.includes(k))];
+      const totalOpinions = opL.reduce((a, k) => a + (opMap[k] || 0), 0);
+      const top2Total = (opMap[opOrder[0]] || 0) + (opMap[opOrder[1]] || 0);
+      document.getElementById('mOpinionTop2').textContent = totalOpinions > 0 ? pct(top2Total, totalOpinions) + '%' : '—';
+      if (opL.length > 0) makeBar('cOpinion', opL.map(k => k.charAt(0).toUpperCase() + k.slice(1)), opL.map(k => opMap[k] || 0), opL.map(k => {
+        if (k === 'mucho mejor de lo que esperaba') return '#1a7a47';
+        if (k === 'algo mejor de lo que esperaba') return '#9ccc65';
+        if (k === 'como lo esperaba') return '#d97706';
+        if (k === 'peor de lo que esperaba') return '#c62828';
+        if (k === 'mucho peor de lo que esperaba') return '#8c1229';
+        return '#6b8094';
+      }), true, true, false, true);
+
+      // Comparacion
+      const compMap = countSingle(getCol(rows, CI.comparacion));
+      const compOrder = ['mucho mejor', 'algo mejor', 'igual no note diferencia', 'peor', 'mucho peor'];
+      const compL = [...compOrder.filter(k => compMap[k]), ...Object.keys(compMap).filter(k => !compOrder.includes(k))];
+      const totalComp = compL.reduce((a, k) => a + (compMap[k] || 0), 0);
+      const top2Comp = (compMap['mucho mejor'] || 0) + (compMap['algo mejor'] || 0);
+      document.getElementById('mTop2').textContent = totalComp > 0 ? pct(top2Comp, totalComp) + '%' : '—';
+      if (compL.length > 0) makeBar('cComparacion', compL.map(k => {
+        if (k === 'igual no note diferencia') return 'Igual / No noté diferencia';
+        return k.charAt(0).toUpperCase() + k.slice(1);
+      }), compL.map(k => compMap[k] || 0), compL.map(k => {
+        if (k === 'mucho mejor') return '#1a7a47';
+        if (k === 'algo mejor') return '#9ccc65';
+        if (k === 'igual no note diferencia') return '#d97706';
+        if (k === 'peor') return '#c62828';
+        if (k === 'mucho peor') return '#8c1229';
+        return '#6b8094';
+      }), true, true, false, true);
+
+      // Atributos
+      const attrWrap = document.getElementById('attrChartWrap');
+      if (CI.atributos.length > 0) {
+        const attrHeaders = CI.atributos.map(idx => {
+          const h = (allRows.length > 0 ? '' : '');
+          return idx;
+        });
+        // We need original headers - store them
+        const attrLabels = CI._attrLabels || [];
+        const attrAvgs = CI.atributos.map(idx => {
+          const vals = rows.map(r => parseFloat((r[idx] || '').toString())).filter(v => !isNaN(v) && v >= 1);
+          return vals.length > 0 ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+        }).filter(v => v > 0);
+        const sortedIdxs = CI.atributos.map((idx, i) => i).filter(i => attrAvgs[i] > 0).sort((a, b) => attrAvgs[b] - attrAvgs[a]);
+        const sortedLabels = sortedIdxs.map(i => attrLabels[i] || `Atributo ${i + 1}`);
+        const sortedAvgs = sortedIdxs.map(i => parseFloat(attrAvgs[i].toFixed(1)));
+        if (sortedLabels.length > 0) {
+          attrWrap.style.display = 'block';
+          destroyChart('cAtributos');
+          const ctx = document.getElementById('cAtributos');
+          const maxScale = sortedAvgs.some(m => m > 5) ? 10 : 5;
+          const isMob = window.innerWidth <= 768; const fs = isMob ? 9 : 10;
+          const attrColors = sortedLabels.map((_, i) => { const palette = ['#8c1229', '#b31a38', '#c42d44', '#d6374f', '#de5067', '#e06272', '#e87f8e']; return palette[i % palette.length]; });
+          charts['cAtributos'] = new Chart(ctx.getContext('2d'), {
+            type: 'bar',
+            data: { labels: sortedLabels, datasets: [{ data: sortedAvgs, backgroundColor: attrColors, borderRadius: 8, borderSkipped: false }] },
+            options: {
+              responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+              plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: c => ` ${c.raw.toFixed(1)} / ${maxScale}` } },
+                datalabels: { anchor: 'end', align: 'end', formatter: v => `${v.toFixed(1)}`, font: { family: 'Manrope', weight: 800, size: fs + 1 }, color: '#001d34', clip: false }
+              },
+              layout: { padding: { right: 72, top: 4, bottom: 4 } },
+              scales: {
+                x: { min: 0, max: maxScale, grid: { color: 'rgba(0,29,52,.06)' }, ticks: { font: { family: 'Manrope', size: fs }, stepSize: maxScale === 10 ? 2 : 1 } },
+                y: { grid: { display: false }, ticks: { font: { family: 'Manrope', size: fs, weight: '600' }, color: '#3d5166' } }
+              }
+            },
+            plugins: [ChartDataLabels]
+          });
+        } else { attrWrap.style.display = 'none'; }
+      } else { attrWrap.style.display = 'none'; }
+
+      // Intención compra
+      const caMap = countSingle(getCol(rows, CI.compra));
+      const cL = [], cD = [];
+      const caOrd = ['compradores potenciales'];
+      caOrd.forEach(k => { if (caMap[k]) { cL.push(k); cD.push(caMap[k]); } });
+      Object.entries(caMap).forEach(([k, v]) => { if (!caOrd.includes(k)) { cL.push(k); cD.push(v); } });
+      const cTot2 = cD.reduce((a, b) => a + b, 0);
+      let compradoresPotenciales = 0;
+      cL.forEach((l, i) => { const ll = l.toLowerCase(); if (ll.includes('compradores potenciales') || ll.includes('potenciales') || ll === 'sí') compradoresPotenciales += cD[i]; });
+      const pPos = cTot2 > 0 ? pct(compradoresPotenciales, cTot2) : 0;
+      document.getElementById('kpiCompraIntencion').textContent = cTot2 > 0 ? pPos + '%' : '—';
+      const diffCompraIntencion = pPos - BENCH_COMPRA;
+      document.getElementById('kpiBenchCompraIntencion').innerHTML = cTot2 > 0 ? `<div class="bench-pill"><span class="bench-label">Bench ${BENCH_COMPRA}%</span><span class="bench-val" style="color:${diffCompraIntencion >= 0 ? 'var(--success)' : 'var(--error)'}">${diffCompraIntencion >= 0 ? '+' : ''}${diffCompraIntencion}pp</span></div>` : '';
+
+      // Update the new minicard
+      document.getElementById('mCompraPotencial').textContent = cTot2 > 0 ? pPos + '%' : '—';
+      document.getElementById('mCompraBench').innerHTML = cTot2 > 0 ? `<div class="bench-pill" style="margin-top:4px;"><span class="bench-label">Bench ${BENCH_COMPRA}%</span><span class="bench-val" style="color:${diffCompraIntencion >= 0 ? 'var(--success)' : 'var(--error)'}">${diffCompraIntencion >= 0 ? '+' : ''}${diffCompraIntencion}pp</span></div>` : '';
+
+      const cColors3 = cL.map(l => {
+        const ll = l.toLowerCase();
+        // Compradores Potenciales: Blue
+        if (ll.includes('certeza') || (ll.includes('probablemente') && !ll.includes('no')) || ll === 'sí' || ll.includes('compradores potenciales')) return '#0077a8';
+        // No compradores: Dark red
+        if (ll.includes('no')) return '#8c1229';
+        // Indecisos: Grey
+        return '#d1d5db';
+      });
+      if (cL.length > 0) makeBar('cCompra', cL.map(l => l.charAt(0).toUpperCase() + l.slice(1)), cD, cColors3, true, true, false, true);
+
+      // No gustó
+      const ngE = sortedEntries(countSingle(getCol(rows, CI.noGusta).filter(v => v && v.length > 2 && !/^(no|ninguno|nada|todo bien)$/i.test(v))), 10);
+      if (ngE.length > 0) makeBar('cNoGusta', ngE.map(e => e[0].charAt(0).toUpperCase() + e[0].slice(1)), ngE.map(e => e[1]), ngE.map(() => '#8b0000'), true, true, false, true);
+
+      // NPS
+      const npsRaw = getCol(rows, CI.nps);
+      const npsNums = npsRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 0 && v <= 10);
+      let proPct = 0, pSi = 0;
+      if (npsNums.length > 0) {
+        let det = 0, pas = 0, pro = 0;
+        npsNums.forEach(n => { if (n <= 6) det++; else if (n <= 8) pas++; else pro++; });
+        const nT = npsNums.length; const pPro = pct(pro, nT), pPas = pct(pas, nT), pDet = nT > 0 ? 100 - pPro - pPas : 0; proPct = pPro; const nps = pPro - pDet;
+        document.getElementById('npsLabel').textContent = 'Net Promoter Score (NPS)';
+        document.getElementById('npsValue').textContent = (nps >= 0 ? '+' : '') + nps;
+        document.getElementById('npsValue').style.color = nps >= 0 ? 'var(--success)' : 'var(--error)';
+        document.getElementById('npsBarDet').style.width = pDet + '%'; document.getElementById('npsBarPas').style.width = pPas + '%'; document.getElementById('npsBarPro').style.width = pPro + '%';
+        document.getElementById('npsLegDet').textContent = `Detractores ${pDet}%`; document.getElementById('npsLegPas').textContent = `Pasivos ${pPas}%`; document.getElementById('npsLegPro').textContent = `Promotores ${pPro}%`;
+        document.getElementById('npsLegendBar').innerHTML = ['Detractores (0–6)', 'Pasivos (7–8)', 'Promotores (9–10)'].map((l, i) => `<div style="display:flex;align-items:center;gap:5px;color:${['var(--error)', '#9CCC65', 'var(--success)'][i]};"><span style="width:8px;height:8px;border-radius:50%;background:${['var(--error)', '#9CCC65', 'var(--success)'][i]};display:inline-block;"></span>${l}</div>`).join('');
+        const npsDist = {}; npsNums.forEach(n => { const k = String(Math.round(n)); npsDist[k] = (npsDist[k] || 0) + 1; });
+        document.getElementById('npsScaleWrap').style.display = 'block';
+        makeRatingBar('cNpsScale', npsDist, 10, n => { if (n <= 6) return '#c62828'; if (n <= 8) return '#9CCC65'; return '#1a7a47'; }, true);
+      } else {
+        const siRec = npsRaw.filter(v => /^(sí|si)$/i.test(v.trim())).length; pSi = pct(siRec, npsRaw.length);
+        document.getElementById('npsLabel').textContent = 'Recomendarían el producto';
+        document.getElementById('npsValue').textContent = npsRaw.length > 0 ? pSi + '%' : '—';
+        document.getElementById('npsValue').style.color = 'var(--success)';
+        document.getElementById('npsBarDet').style.width = (100 - pSi) + '%'; document.getElementById('npsBarPas').style.width = '0%'; document.getElementById('npsBarPro').style.width = pSi + '%';
+        document.getElementById('npsLegDet').textContent = `No recomendarían ${100 - pSi}%`; document.getElementById('npsLegPas').textContent = ''; document.getElementById('npsLegPro').textContent = `Sí recomendarían ${pSi}%`;
+        document.getElementById('npsScaleWrap').style.display = 'none'; document.getElementById('npsLegendBar').innerHTML = '';
+      }
+
+      // Mini stats logic removed (minicards hidden)
+
+      // Insights
+      document.getElementById('insightCompra').innerHTML = cTot2 > 0 ? `<strong>${pPos}%</strong> de los encuestados son compradores potenciales de Huesitos Combix${pPos >= BENCH_COMPRA ? ', superando el benchmark del sector (' + BENCH_COMPRA + '%)' : ''}.` : '—';
+      document.getElementById('insightScore').innerHTML = scoreArr.length > 0 ? `La valoración media es <strong>${scoreAvg.toFixed(1)}/10</strong>${diffS >= 0 ? ', por encima' : ', por debajo'} del benchmark de referencia (${BENCH_SCORE}).` : '—';
+      document.getElementById('insightBrand').innerHTML = conociaTotal > 0 ? `<strong>${pct(Math.max(conociaTotal - siKnew, 0), conociaTotal)}%</strong> de los consumidores descubrieron Huesitos Combix gracias al sampling de Samplia.` : '—';
+      document.getElementById('insightNps').innerHTML = npsNums.length > 0 ? `<strong>${proPct}%</strong> son promotores de la marca. NPS = <strong>${proPct - (100 - proPct - pct(npsNums.filter(n => n >= 7 && n <= 8).length, npsNums.length))}</strong>.` : (npsRaw.length > 0 ? `<strong>${pSi}%</strong> de los encuestados recomendarían Huesitos Combix a un amigo o familiar.` : '—');
+
+      document.getElementById('footerInfo').textContent = `Total encuestados: ${total.toLocaleString('es-ES')} · Campaña 13/03/2026 – 10/04/2026`;
+    }
+
+    /* ── Google Sheets parser ── */
+    function stripGvizWrapper(raw) {
+      const text = raw.toString().trim();
+      const wrapped = text.match(/^[^(]*\((.*)\);?$/s);
+      return wrapped ? wrapped[1] : text.replace(/^[^\{]+/, '').replace(/[^\}]+$/, '');
+    }
+    function parseGvizHeaders(raw) { const json = JSON.parse(stripGvizWrapper(raw)); return json.table.cols.map(c => c.label || c.id || ''); }
+    function parseGviz(raw) { const json = JSON.parse(stripGvizWrapper(raw)); return json.table.rows.map(r => r.c.map(c => c ? (c.v ?? c.f ?? '') : '')); }
+
+    function getFiltered() {
+      const g = document.getElementById('fGender').value, a = document.getElementById('fAge').value;
+      return allRows.filter(r => {
+        if (g && CI.gender >= 0) {
+          const val = (r[CI.gender] || '').toString().trim().toLowerCase();
+          const isF = val.startsWith('f') || val === 'mujer' || val === 'femenino';
+          const isM = val.startsWith('m') || val === 'hombre' || val === 'masculino';
+          if (g === 'F' && !isF) return false;
+          if (g === 'M' && !isM) return false;
+        }
+        if (a && CI.age >= 0) { const ag = ageGroup((r[CI.age] || '').toString()); if (!ag || ag !== a) return false; }
+        return true;
+      });
+    }
+
+    function showErrorBanner(msg, detail = '') {
+      let banner = document.getElementById('dataBanner');
+      if (!banner) {
+        banner = document.createElement('div'); banner.id = 'dataBanner';
+        banner.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:999;background:#001d34;color:#fff;font-family:Manrope,sans-serif;font-size:.8rem;font-weight:600;padding:.9rem 1.4rem;border-radius:2rem;box-shadow:0 8px 40px rgba(0,29,52,.35);display:flex;align-items:center;gap:.75rem;max-width:92vw;';
+        document.body.appendChild(banner);
+      }
+      banner.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><div style="color:#fff">${msg}</div>${detail ? `<div style="color:#94a3b8;font-size:.72rem;margin-top:2px">${detail}</div>` : ''}</div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.1rem;line-height:1;padding:0 0 0 .5rem">✕</button>`;
+    }
+
+    function buildCorsUrl(base) { const u = new URL(base); u.searchParams.set('tqx', 'out:json'); return u.toString(); }
+    function buildJsonpUrl(base, callbackName) { const u = new URL(base); u.searchParams.set('tqx', 'responseHandler:' + callbackName); return u.toString(); }
+
+    async function loadGSheetText(url) {
+      const res = await fetch(buildCorsUrl(url), { mode: 'cors', cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      if (text.trim().startsWith('<!')) throw new Error('HTML_RESPONSE');
+      return text;
+    }
+
+    function loadGSheetJsonp(url) {
+      return new Promise((resolve, reject) => {
+        const callbackName = '__gsheet_jsonp_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+        let timeout;
+        window[callbackName] = data => {
+          cleanup();
+          if (!data) reject(new Error('JSONP: respuesta vacía'));
+          else resolve(JSON.stringify(data));
+        };
+        const script = document.createElement('script'); script.src = buildJsonpUrl(url, callbackName); script.async = true;
+        script.onerror = () => { cleanup(); reject(new Error('JSONP load error — verifica que la hoja esté publicada en Web')); };
+        timeout = setTimeout(() => { cleanup(); reject(new Error('JSONP timeout (15s)')); }, 15000);
+        function cleanup() { clearTimeout(timeout); delete window[callbackName]; if (script.parentNode) script.parentNode.removeChild(script); }
+        document.head.appendChild(script);
+      });
+    }
+
+    async function fetchData() {
+      try {
+        let raw; let usedJsonp = false;
+        try {
+          raw = await loadGSheetText(GSHEET_URL);
+        } catch (firstError) {
+          raw = await loadGSheetJsonp(GSHEET_URL);
+          usedJsonp = true;
+        }
+        if (!raw || raw.trim().length < 10) throw new Error('Respuesta vacía del servidor');
+        const headers = parseGvizHeaders(raw);
+        detectColumns(headers);
+        // Force attributes to columns P through V (indices 15-21)
+        CI.atributos = [15, 16, 17, 18, 19, 20, 21];
+        CI._attrLabels = CI.atributos.map(idx => {
+          const h = (headers[idx] || '').toString().trim();
+          return h.charAt(0).toUpperCase() + h.slice(1);
+        });
+        allRows = parseGviz(raw);
+        if (allRows.length === 0) throw new Error('La hoja no contiene filas de datos');
+        render(getFiltered());
+        const b = document.getElementById('dataBanner'); if (b) b.remove();
+        const now = new Date();
+        document.getElementById('lastUpdate').textContent = `Actualizado: ${now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}${usedJsonp ? ' (JSONP)' : ''}`;
+      } catch (e) {
+        const isFile = location.protocol === 'file:';
+        let msg = 'No se pueden cargar los datos del Google Sheet';
+        let detail = '';
+        if (isFile) { msg = 'Abre el dashboard desde un servidor web'; detail = 'file:// bloquea peticiones externas. Usa Live Server (VS Code) o sube el archivo a un hosting.'; }
+        else if (/HTML_RESPONSE|login|JSONP load error/i.test(e.message)) { msg = 'La hoja de Google no está publicada en la web'; detail = 'Ve a Archivo → Compartir → Publicar en la web → selecciona la hoja → Publicar. Luego recarga.'; }
+        else { detail = e.message || 'Abre la consola del navegador (F12) para más detalles.'; }
+        showErrorBanner(msg, detail);
+        document.getElementById('lastUpdate').textContent = 'Error · ' + (e.message || 'desconocido');
+      }
+    }
+
+    document.getElementById('fGender').addEventListener('change', () => render(getFiltered()));
+    document.getElementById('fAge').addEventListener('change', () => render(getFiltered()));
+    document.getElementById('lastUpdate').style.cursor = 'pointer';
+    document.getElementById('lastUpdate').title = 'Haz clic para recargar';
+    document.getElementById('lastUpdate').addEventListener('click', fetchData);
+
+    document.getElementById('lastUpdate').textContent = 'Cargando datos…';
+    fetchData();
+    setInterval(fetchData, 24 * 60 * 60 * 1000);
+
+    document.getElementById('downloadPdfBtn').addEventListener('click', async function () {
+      const btn = this; const orig = btn.innerHTML;
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Generando…'; btn.disabled = true;
+      try {
+        const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfW = 210, pdfH = 297, mg = 12, usable = pdfW - mg * 2;
+        let logoData = null, logoRatio = 1; const lEl = document.querySelector('.samplia-logo');
+        if (lEl) { const lc = await html2canvas(lEl, { backgroundColor: null, scale: 2, useCORS: true }); logoData = lc.toDataURL('image/png'); logoRatio = lc.height / lc.width; }
+        const addH = () => { if (logoData) { const lw = 25, lh = lw * logoRatio; pdf.addImage(logoData, 'PNG', mg, mg, lw, lh); } };
+        let y = mg + 12; addH();
+        const blocks = Array.from(document.querySelector('.content').children).filter(el => !el.classList.contains('filter-bar') && el.tagName !== 'SCRIPT');
+        for (const block of blocks) {
+          const canvas = await html2canvas(block, { scale: 1.5, useCORS: true, backgroundColor: '#f8f9ff' });
+          const img = canvas.toDataURL('image/jpeg', .82); const dh = canvas.height * (usable / canvas.width);
+          if (y + dh > pdfH - mg) { pdf.addPage(); addH(); y = mg + 12; }
+          pdf.addImage(img, 'JPEG', mg, y, usable, dh); y += dh + 4;
+        }
+        pdf.save('Resultados_Huesitos_Combix.pdf');
+      } catch (err) { console.error(err); alert('Error al generar el PDF.'); }
+      finally { btn.innerHTML = orig; btn.disabled = false; }
+    });
+
+    let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(() => { if (allRows.length > 0) render(getFiltered()); }, 250); });
+
+    const fb = document.querySelector('.filter-bar');
+    if (fb) {
+      const observer = new IntersectionObserver(([e]) => { fb.classList.toggle('is-sticky', e.intersectionRatio < 1); }, { threshold: [1], rootMargin: '-73px 0px 0px 0px' });
+      observer.observe(fb);
+    }
+
+    /* LIGHTBOX LOGIC */
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = src;
+      lb.style.display = 'flex';
+      setTimeout(() => lb.classList.add('active'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('active');
+      setTimeout(() => {
+        lb.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function (e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+
+</html>
